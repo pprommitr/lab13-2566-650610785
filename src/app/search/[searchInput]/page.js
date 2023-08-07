@@ -4,11 +4,9 @@ import { MovieRow } from "@/components/MovieRow";
 import { movieDB } from "@/libs/movieDB";
 
 export default function SearchResultPage({ params }) {
-  const processedSearchInput = params.searchInput.replaceAll("%20", " ");
+  const searchInput = params.searchInput.replaceAll("%20", " ");
   const filteredMovies = movieDB.filter((movie) =>
-    movie.title
-      .toLocaleLowerCase()
-      .includes(processedSearchInput.toLocaleLowerCase())
+    movie.title.toLocaleLowerCase().includes(searchInput.toLocaleLowerCase())
   );
   /*
   tip2 : Use "includes" string method to check substring
@@ -24,7 +22,7 @@ export default function SearchResultPage({ params }) {
   return (
     <div>
       <p className="fw-bold fs-4 text-center my-0">
-        Searching &quot; {processedSearchInput} &quot;
+        Searching &quot; {searchInput} &quot;
       </p>
       <p className="fw-bold fs-4 text-center">
         Found {filteredMovies.length} result(s)
@@ -34,7 +32,6 @@ export default function SearchResultPage({ params }) {
           key={movie.id}
           id={movie.id}
           title={movie.title}
-          detail={movie.detail}
           rating={movie.rating}
           number={movie.id}
         />
